@@ -5,15 +5,17 @@
 **ZDEM 模型可视化编辑器 | ZDEM Model File Visualization Tool**
 
 ![Python](https://img.shields.io/badge/Python-3.8%2B-blue)
-![PySide6](https://img.shields.io/badge/PySide-6.5%2B-green)
+![Tkinter](https://img.shields.io/badge/Tkinter-8.5%2B-green)
+![Matplotlib](https://img.shields.io/badge/Matplotlib-3.0%2B-orange)
+![NumPy](https://img.shields.io/badge/NumPy-1.20%2B-lightblue)
 ![License](https://img.shields.io/badge/License-MIT-yellow.svg)
 ![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20Linux%20%7C%20macOS-lightgrey)
 
 </div>
 
-基于 PySide6 的 ZDEM 模型文件可视化与编辑工具，支持 WALL、GLINE、BOX 和 PROP P4 等多种对象类型的解析、渲染和交互操作。
+基于 tkinter 和 matplotlib 的 ZDEM 模型文件可视化与编辑工具，支持 WALL、GLINE、BOX 和 PROP P4 等多种对象类型的解析、渲染和交互操作。
 
-> A PySide6-based graphical tool for visualizing and editing ZDEM model files. Supports parsing, rendering, and interactive manipulation of object types including WALL, GLINE, BOX, and PROP P4.
+> A tkinter + matplotlib-based tool for visualizing and editing ZDEM model files. Supports parsing, rendering, and interactive manipulation of object types including WALL, GLINE, BOX, and PROP P4.
 
 ---
 
@@ -22,7 +24,7 @@
 | 中文特性 | English Feature | 说明 / Description |
 |---------|----------------|-------------------|
 | 多对象支持 | Multi-Object Support | 支持 WALL、GLINE、BOX、PROP P4 四种对象 |
-| 交互式画布 | Interactive Canvas | 缩放、平移、选择高亮，鼠标和键盘快捷键 |
+| 交互式画布 | Interactive Canvas | 使用 matplotlib FigureCanvasTkAgg 实现缩放、平移、选择 |
 | 异步加载 | Async Loading | 大文件后台加载，界面保持响应 |
 | 坐标系统 | Coordinate System | 第一象限坐标系，实时坐标显示 |
 | 性能优化 | Performance | LOD 渲染、视口裁剪、智能缓存 |
@@ -59,16 +61,16 @@
 
 ## 核心原理 | Core Method
 
-工具通过解析 ZDEM 模型定义文件，将文本描述的结构化对象数据转换为内存中的模型数据结构，然后利用 PySide6 的 QGraphicsView 框架进行可视化渲染。
+工具通过解析 ZDEM 模型定义文件，将文本描述的结构化对象数据转换为内存中的模型数据结构，然后利用 matplotlib 的 FigureCanvasTkAgg 嵌入 tkinter 窗口进行可视化渲染。
 
 核心解析流程：
 
 1. **词法分析**：读取文件行，识别 BOX、WALL、GLINE、PROP P4 等关键字
 2. **语法解析**：按对象类型规则提取坐标、颜色、参数
 3. **模型构建**：将解析结果组装为 ZDEMModel 对象树
-4. **渲染绘制**：在 QGraphicsScene 中绘制几何图形，支持交互操作
+4. **渲染绘制**：在 matplotlib axes 中绘制几何图形，支持交互操作
 
-> The tool parses ZDEM model definition files, converting structured text into in-memory model data structures, then renders them using the PySide6 QGraphicsView framework.
+> The tool parses ZDEM model definition files, converting structured text into in-memory model data structures, then renders them using matplotlib's FigureCanvasTkAgg embedded in a tkinter window.
 
 ---
 
@@ -78,9 +80,9 @@
 |------|------|
 | `zdem_editor/core/models.py` | 数据模型定义：Wall、GLine、Box、PropP4、ZDEMModel |
 | `zdem_editor/core/parser.py` | 文件解析器：读取 .zdem 和 Python 脚本格式 |
-| `zdem_editor/ui/canvas.py` | 交互式画布：缩放、平移、对象选择高亮 |
-| `zdem_editor/ui/main_window.py` | 主窗口（中文界面） |
-| `zdem_editor/ui/main_window_en.py` | 主窗口（英文界面） |
+| `zdem_editor/ui/canvas.py` | 基于 matplotlib 的交互式画布，缩放、平移、对象选择高亮 |
+| `zdem_editor/ui/main_window.py` | 主窗口（中文界面），基于 tkinter |
+| `zdem_editor/ui/main_window_en.py` | 主窗口（英文界面），基于 tkinter |
 | `zdem_editor/utils/font_config.py` | 字体配置，跨平台兼容 |
 | `zdem_editor/utils/helpers.py` | 工具函数：坐标提取、颜色标准化 |
 
@@ -93,8 +95,8 @@
 git clone https://github.com/Phoenix0531-sudo/ZDEM_Model_Visualization_Editor.git
 cd ZDEM_Model_Visualization_Editor
 
-# 安装依赖
-pip install -r requirements.txt
+# 安装依赖（tkinter 为系统自带，无需 pip 安装）
+pip install matplotlib numpy
 
 # 启动应用
 python main.py
@@ -119,7 +121,7 @@ python main.py
 
 ## 输出说明 | Output
 
-工具在画布中以图形方式渲染模型对象，状态栏显示当前鼠标位置的坐标。对象类型及视觉表示如下：
+工具在 matplotlib 画布中以图形方式渲染模型对象，状态栏显示当前鼠标位置的坐标。对象类型及视觉表示如下：
 
 | 对象类型 | 颜色 | 描述 |
 |---------|------|------|
@@ -128,7 +130,7 @@ python main.py
 | WALL | 红色 | 墙体结构，物理边界 |
 | PROP P4 | 自定义 | 四边形区域 |
 
-> The tool renders model objects graphically on the canvas. The status bar displays real-time mouse coordinates.
+> The tool renders model objects graphically on the matplotlib canvas. The status bar displays real-time mouse coordinates.
 
 ---
 
@@ -137,13 +139,19 @@ python main.py
 ### 系统要求
 
 - Python 3.8 或更高版本
-- PySide6 6.5+
+- tkinter（通常随 Python 一起安装，Linux 下可能需要 `apt install python3-tk`）
+- matplotlib 3.0+
+- numpy 1.20+
 - Windows 7+ / Linux / macOS
 
 ### 依赖安装
 
 ```bash
+# matplotlib 和 numpy 通过 pip 安装
 pip install -r requirements.txt
+
+# Linux 用户需要额外安装 tkinter
+# sudo apt install python3-tk
 ```
 
 ### 运行
@@ -158,16 +166,16 @@ python main.py
 
 ## Docker 使用 | Docker Usage
 
-ZDEM Model Visualization Editor 是 PySide6 桌面 GUI 应用，Docker 环境主要用于**构建验证和依赖安装测试**，不适合作为主要的 GUI 运行方式。
+ZDEM Model Visualization Editor 是 tkinter 桌面 GUI 应用，Docker 环境主要用于**构建验证和依赖安装测试**，不适合作为主要的 GUI 运行方式。tkinter 在 Docker 中需要 `tk-dev` 系统库支持，且需要 X11 转发才能显示窗口。
 
-> This tool is a PySide6 desktop GUI application. The Docker environment is intended for **build verification and dependency testing only** — it is not suitable for running the GUI.
+> This tool is a tkinter desktop GUI application. The Docker environment is intended for **build verification and dependency testing only** — it is not suitable for running the GUI. tkinter requires X11 forwarding in Docker for actual display.
 
 ```bash
 # 构建镜像
 docker build -t zdem-editor .
 
-# 验证导入
-docker run --rm zdem-editor python -c "from zdem_editor.core.models import ZDEMModel; print('Import OK')"
+# 导入验证（非交互模式）
+docker run --rm zdem-editor
 ```
 
 ---
@@ -199,7 +207,7 @@ ZDEM_Model_Visualization_Editor/
     │   ├── models.py        # 数据模型
     │   └── parser.py        # 文件解析器
     ├── ui/
-    │   ├── canvas.py        # 交互式画布
+    │   ├── canvas.py        # matplotlib 交互式画布
     │   ├── main_window.py   # 主窗口（中文）
     │   └── main_window_en.py# 主窗口（英文）
     └── utils/

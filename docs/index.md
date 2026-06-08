@@ -2,22 +2,23 @@
 
 <div align="center">
 
-A PySide6-based tool for visualizing and editing ZDEM model files.
+A tkinter + matplotlib tool for visualizing and editing ZDEM model files.
 
 ![Python](https://img.shields.io/badge/Python-3.8%2B-blue)
-![PySide6](https://img.shields.io/badge/PySide-6.5%2B-green)
+![Tkinter](https://img.shields.io/badge/Tkinter-8.5%2B-green)
+![Matplotlib](https://img.shields.io/badge/Matplotlib-3.0%2B-orange)
 ![License](https://img.shields.io/badge/License-MIT-yellow.svg)
 
 </div>
 
 ## Overview
 
-Interactive graphical editor for ZDEM model files. Supports WALL, GLINE, BOX, and PROP P4 object types with real-time rendering, selection highlighting, and asynchronous file loading.
+Interactive graphical editor for ZDEM model files. Supports WALL, GLINE, BOX, and PROP P4 object types with real-time rendering via matplotlib, selection highlighting, and asynchronous file loading.
 
 ## Quick Start
 
 ```bash
-pip install -r requirements.txt
+pip install matplotlib numpy
 python main.py
 ```
 
@@ -25,7 +26,7 @@ python main.py
 
 ```bash
 docker build -t zdem-editor .
-docker run --rm zdem-editor python -c "from zdem_editor.core.models import ZDEMModel; print('OK')"
+docker run --rm zdem-editor
 ```
 
 *Docker is for build verification only; GUI requires a native display environment.*

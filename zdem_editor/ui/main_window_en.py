@@ -316,8 +316,6 @@ Features:
 • Dynamic scaling and fitting
 • Object information viewing
 • Object selection and highlighting
-
-Developed by: Kiro AI Assistant
 """
         messagebox.showinfo("About", about_text)
     

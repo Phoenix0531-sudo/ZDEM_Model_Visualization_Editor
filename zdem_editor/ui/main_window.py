@@ -310,8 +310,6 @@ class MainWindow:
 • 动态缩放和适应
 • 对象信息查看
 • 对象选择和高亮
-
-开发: Kiro AI Assistant
 """
         messagebox.showinfo("关于", about_text)
     

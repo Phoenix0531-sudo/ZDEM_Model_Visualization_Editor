@@ -1,6 +1,5 @@
 #2021-05-29
-#李长圣@成都
-#走滑
+# Strike-slip experiment
 
 start
 set disk 0
