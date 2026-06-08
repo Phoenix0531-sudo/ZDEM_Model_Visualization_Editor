@@ -1,9 +1,9 @@
 
 ######################################
-# title: jiaoliqing论文里的走滑实验模拟
+# title: Strike-slip experiment simulation
 # date: 2022-05-11
-# authors: 张召
-# E-mail: 1034860292@qq.com
+# authors: Project Contributors
+# E-mail: project.contributors@example.com
 # note:
 # 括号内参数可根据模型大小及个人需要修改
 # 脚本命令不区分大小写

@@ -1,234 +1,232 @@
+<div align="center">
+
 # ZDEM Model Visualization Editor
 
-> 一个用于可视化和编辑 ZDEM 模型文件的高性能图形化工具
+**ZDEM 模型可视化编辑器 | ZDEM Model File Visualization Tool**
 
-## 🚀 快速使用
+![Python](https://img.shields.io/badge/Python-3.8%2B-blue)
+![PySide6](https://img.shields.io/badge/PySide-6.5%2B-green)
+![License](https://img.shields.io/badge/License-MIT-yellow.svg)
+![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20Linux%20%7C%20macOS-lightgrey)
 
-### 方法1：直接运行
+</div>
+
+基于 PySide6 的 ZDEM 模型文件可视化与编辑工具，支持 WALL、GLINE、BOX 和 PROP P4 等多种对象类型的解析、渲染和交互操作。
+
+> A PySide6-based graphical tool for visualizing and editing ZDEM model files. Supports parsing, rendering, and interactive manipulation of object types including WALL, GLINE, BOX, and PROP P4.
+
+---
+
+## 技术特性 | Features
+
+| 中文特性 | English Feature | 说明 / Description |
+|---------|----------------|-------------------|
+| 多对象支持 | Multi-Object Support | 支持 WALL、GLINE、BOX、PROP P4 四种对象 |
+| 交互式画布 | Interactive Canvas | 缩放、平移、选择高亮，鼠标和键盘快捷键 |
+| 异步加载 | Async Loading | 大文件后台加载，界面保持响应 |
+| 坐标系统 | Coordinate System | 第一象限坐标系，实时坐标显示 |
+| 性能优化 | Performance | LOD 渲染、视口裁剪、智能缓存 |
+| 对象选择 | Object Selection | 点击高亮、多选支持、Esc 取消选择 |
+| 文件格式 | File Format Support | 解析 .zdem 文件及 Python 脚本格式的模型定义 |
+
+---
+
+## 目录 | Table of Contents
+
+- [数据准备 | Data Preparation](#数据准备--data-preparation)
+- [核心原理 | Core Method](#核心原理--core-method)
+- [模块文档 | Module Reference](#模块文档--module-reference)
+- [快速开始 | Quick Start](#快速开始--quick-start)
+- [输出说明 | Output](#输出说明--output)
+- [安装与运行 | Installation](#安装与运行--installation)
+- [Docker 使用 | Docker Usage](#docker-使用--docker-usage)
+- [项目结构 | Project Structure](#项目结构--project-structure)
+- [引用 | Citation](#引用--citation)
+- [许可证 | License](#许可证--license)
+
+---
+
+## 数据准备 | Data Preparation
+
+本工具需要 ZDEM 格式的模型文件作为输入。支持的输入格式包括：
+
+- **.zdem 文件**：标准 ZDEM 模型定义文件（如 `sample.zdem`）
+- **Python 脚本**：包含 WALL/GLINE 等对象定义的 Python 文件（如 `Test/gen0.py`）
+
+> This tool requires ZDEM-format model files as input. Supported formats include .zdem standard definition files and Python script files containing object definitions.
+
+---
+
+## 核心原理 | Core Method
+
+工具通过解析 ZDEM 模型定义文件，将文本描述的结构化对象数据转换为内存中的模型数据结构，然后利用 PySide6 的 QGraphicsView 框架进行可视化渲染。
+
+核心解析流程：
+
+1. **词法分析**：读取文件行，识别 BOX、WALL、GLINE、PROP P4 等关键字
+2. **语法解析**：按对象类型规则提取坐标、颜色、参数
+3. **模型构建**：将解析结果组装为 ZDEMModel 对象树
+4. **渲染绘制**：在 QGraphicsScene 中绘制几何图形，支持交互操作
+
+> The tool parses ZDEM model definition files, converting structured text into in-memory model data structures, then renders them using the PySide6 QGraphicsView framework.
+
+---
+
+## 模块文档 | Module Reference
+
+| 模块 | 功能 |
+|------|------|
+| `zdem_editor/core/models.py` | 数据模型定义：Wall、GLine、Box、PropP4、ZDEMModel |
+| `zdem_editor/core/parser.py` | 文件解析器：读取 .zdem 和 Python 脚本格式 |
+| `zdem_editor/ui/canvas.py` | 交互式画布：缩放、平移、对象选择高亮 |
+| `zdem_editor/ui/main_window.py` | 主窗口（中文界面） |
+| `zdem_editor/ui/main_window_en.py` | 主窗口（英文界面） |
+| `zdem_editor/utils/font_config.py` | 字体配置，跨平台兼容 |
+| `zdem_editor/utils/helpers.py` | 工具函数：坐标提取、颜色标准化 |
+
+---
+
+## 快速开始 | Quick Start
+
 ```bash
+# 克隆仓库
+git clone https://github.com/Phoenix0531-sudo/ZDEM_Model_Visualization_Editor.git
+cd ZDEM_Model_Visualization_Editor
+
+# 安装依赖
+pip install -r requirements.txt
+
+# 启动应用
 python main.py
 ```
 
-### 方法2：使用启动脚本
-双击 `start.bat` 文件
+启动后按 Ctrl+O 打开一个 .zdem 或 Python 脚本文件，程序将自动解析并显示模型。
 
-### 使用步骤
-1. 启动程序后，点击"打开文件"按钮
-2. 选择 `gen.py` 或 `shear.py` 文件
-3. 程序会自动解析并显示模型
-4. 在左侧面板查看对象信息和列表
-5. **新功能**：点击对象列表中的对象可高亮显示对应线条
-6. 按 `Esc` 键或菜单"视图→清除选择"来取消高亮
+### 快捷键
 
-## ✅ 测试结果
-- ✅ gen.py: 成功解析 2个WALL + 6个GLINE = 8个对象
-- ✅ shear.py: 成功解析 1个WALL + 4个GLINE = 5个对象
-- ✅ shear1.py: 成功解析 1个WALL + 3个PROP P4 = 4个对象
-- ✅ 字体问题已解决：程序启动无警告信息
-- ✅ 对象选择高亮功能完全正常
-- ✅ WALL语法解析：支持标准格式和现有格式
-- ✅ PROP P4四边形：支持四边形区域定义和可视化
+| 操作 | 快捷键 |
+|------|--------|
+| 打开文件 | Ctrl+O |
+| 保存文件 | Ctrl+S |
+| 退出程序 | Ctrl+Q |
+| 缩放 | 鼠标滚轮 |
+| 重置视图 | R |
+| 适应视图 | F |
+| 全选对象 | Ctrl+A |
+| 清除选择 | Escape |
 
-## 🧪 测试文件
-项目包含完整的测试套件，位于 `Test/` 文件夹中：
+---
 
-- **Test/test_selection.py** - 测试对象选择和高亮功能
-- **Test/test_wall_syntax.py** - 测试WALL语法解析功能
-- **Test/test_enhanced_parser.py** - 测试增强解析器鲁棒性
-- **Test/test_prop_p4.py** - 测试PROP P4四边形功能
-- **Test/gen0.py** - 测试数据文件（P1/P2格式）
-- **Test/shear0.py** - 测试数据文件（混合格式）
-- **Test/shear1.py** - 测试数据文件（复杂格式，含P4）
+## 输出说明 | Output
 
-运行测试：
-```bash
-python Test\test_selection.py
-python Test\test_wall_syntax.py
-python Test\test_enhanced_parser.py
-python Test\test_prop_p4.py
-```
+工具在画布中以图形方式渲染模型对象，状态栏显示当前鼠标位置的坐标。对象类型及视觉表示如下：
 
-## 🔧 技术优化
-- **字体配置**：自动配置系统字体，避免中文字体警告
-- **英文界面**：主界面使用英文，确保跨平台兼容性
-- **警告过滤**：智能过滤matplotlib字体警告
-- **性能优化**：减少不必要的字体渲染开销
-- **数据结构优化**：修复unhashable type错误，使用列表存储选中对象
-- **解析器增强**：支持P1/P2格式、数字颜色、特殊颜色缩写等新语法
+| 对象类型 | 颜色 | 描述 |
+|---------|------|------|
+| BOX | 蓝色 | 矩形区域，定义模型几何边界 |
+| GLINE | 绿色 | 几何线段，连接关键点 |
+| WALL | 红色 | 墙体结构，物理边界 |
+| PROP P4 | 自定义 | 四边形区域 |
 
-## 🐛 已修复的问题
-- ✅ **unhashable type wall错误**：将选中对象存储从set改为list
-- ✅ **字体警告问题**：完全消除matplotlib和tkinter字体警告
-- ✅ **跨平台兼容性**：英文界面确保在不同系统上正常显示
+> The tool renders model objects graphically on the canvas. The status bar displays real-time mouse coordinates.
 
-[![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)](https://python.org)
-[![PySide6](https://img.shields.io/badge/PySide6-6.5+-green.svg)](https://pypi.org/project/PySide6/)
-[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+---
 
-## ✨ 核心特性
-
-| 特性           | 描述                         |
-| -------------- | ---------------------------- |
-| 🚀 **异步加载** | 大文件后台加载，界面不卡顿   |
-| 📐 **坐标系统** | 第一象限坐标系，实时坐标显示 |
-| 🔬 **实验区域** | BOX区域管理，边界检测        |
-| ⚡ **高性能**   | LOD渲染，视口裁剪，智能缓存  |
-| 🎨 **交互编辑** | 拖拽操作，多选支持           |
-
-## 🚀 快速开始
-
-### 一键启动
-
-### 三步上手
-1. **启动程序** → 运行 `python main.py`
-2. **加载文件** → 按 `Ctrl+O` 选择 `sample.zdem`
-3. **开始使用** → 鼠标操作视图，点击选择对象
-
-
-## 📁 文件支持
-
-| 文件            | 类型       | 对象数 | 说明                       |
-| --------------- | ---------- | ------ | -------------------------- |
-| `sample.zdem`   | 标准格式   | 21个   | 完整示例，包含所有对象类型 |
-| `Test/gen.py`   | Python脚本 | 9个    | 走滑实验，复杂几何结构     |
-| `Test/shear.py` | Python脚本 | 2个    | 剪切实验，简单测试用例     |
-
-## 🎨 对象类型
-
-| 对象      | 颜色   | 描述     | 用途         |
-| --------- | ------ | -------- | ------------ |
-| **BOX**   | 🔵 蓝色 | 矩形区域 | 定义几何边界 |
-| **GLINE** | 🟢 绿色 | 几何线段 | 连接关键点   |
-| **WALL**  | 🔴 红色 | 墙体结构 | 物理边界     |
-
-## ⌨️ 常用快捷键
-
-### 文件操作
-- `Ctrl+O` 打开文件
-- `Ctrl+S` 保存文件
-- `Ctrl+Q` 退出程序
-
-### 视图控制
-- `鼠标滚轮` 缩放视图
-- `R` 重置视图
-- `F` 适应视图
-- `Ctrl+G` 切换坐标系
-
-### 编辑操作
-- `Ctrl+A` 全选对象
-- `Escape` 清除选择
-- `拖拽` 移动对象
-
-> 📖 **完整快捷键**: 查看 [用户指南](docs/USER_GUIDE.md#快捷键参考)
-
-## 🔬 实验区域
-
-**BOX实验区域**是定义模型有效工作范围的核心概念：
-
-- 🎯 **边界定义**: 设置模型的有效工作区域
-- 🔍 **边界检查**: 自动检测对象是否在区域内
-- 🎨 **可视化**: 半透明边框显示区域范围
-- ⚙️ **灵活配置**: 自定义大小、颜色、显示状态
-
-**使用方法**: `菜单 → 实验区域 → 配置实验区域`
-
-## 📊 技术特性
-
-### 🎯 坐标系统
-- **第一象限**: 原点(0,0)左下角，Y轴向上
-- **实时显示**: 鼠标坐标实时显示在状态栏
-- **网格对齐**: 主网格1000单位，次网格200单位
-- **精确定位**: 支持小数点后多位精度
-
-### ⚡ 性能优化
-- **异步加载**: 大文件后台处理，界面保持响应
-- **LOD渲染**: 智能细节调整，提升渲染效率
-- **视口裁剪**: 只绘制可见区域，节省资源
-- **智能缓存**: 减少重复计算，提高性能
-
-## 📖 文档
-
-| 文档                            | 内容           | 适用对象 |
-| ------------------------------- | -------------- | -------- |
-| [快速开始](docs/QUICK_START.md) | 一分钟上手指南 | 新用户   |
-| [功能特性](docs/FEATURES.md)    | 完整功能列表   | 了解功能 |
-| [用户指南](docs/USER_GUIDE.md)  | 详细使用说明   | 深度使用 |
-
-## 🛠️ 安装与运行
+## 安装与运行 | Installation
 
 ### 系统要求
-- Python 3.8+
+
+- Python 3.8 或更高版本
 - PySide6 6.5+
-- Windows/macOS/Linux
+- Windows 7+ / Linux / macOS
 
-### 安装方式
+### 依赖安装
 
-#### 快速安装
 ```bash
-pip install PySide6
-python main.py
-```
-
-#### 开发安装
-```bash
-git clone <repository>
-cd ZDEM_Model_Visualization_Editor
 pip install -r requirements.txt
+```
+
+### 运行
+
+```bash
 python main.py
 ```
 
-## 🔧 故障排除
+或双击 `start.bat`（Windows）。
 
-### 常见问题
+---
 
-| 问题         | 解决方案                  |
-| ------------ | ------------------------- |
-| 缺少依赖     | `pip install PySide6`     |
-| 图形异常     | 设置 `QT_OPENGL=software` |
-| 文件无法打开 | 检查文件格式和权限        |
-| 界面卡顿     | 启用异步加载（自动）      |
+## Docker 使用 | Docker Usage
 
-> 🆘 **详细帮助**: 查看 [用户指南](docs/USER_GUIDE.md#故障排除)
+ZDEM Model Visualization Editor 是 PySide6 桌面 GUI 应用，Docker 环境主要用于**构建验证和依赖安装测试**，不适合作为主要的 GUI 运行方式。
 
-## 📂 项目结构
+> This tool is a PySide6 desktop GUI application. The Docker environment is intended for **build verification and dependency testing only** — it is not suitable for running the GUI.
 
-### 🏗️ 新架构 (推荐)
-```
-ZDEM_Model_Visualization_Editor/
-├── 📦 zdem_editor/          # 主包
-│   ├── core/                # 🧠 核心模块
-│   │   ├── models.py        # 数据模型
-│   │   ├── exceptions.py    # 异常定义
-│   │   ├── constants.py     # 常量定义
-│   │   └── config.py        # 配置管理
-│   ├── parsers/             # 📖 解析器模块
-│   │   ├── base.py          # 解析器基类
-│   │   └── factory.py       # 解析器工厂
-│   ├── ui/                  # 🎨 用户界面
-│   │   ├── application.py   # 应用程序类
-│   │   └── main_window.py   # 主窗口
-│   └── utils/               # 🔧 工具模块
-│       ├── logger.py        # 日志系统
-│       └── file_utils.py    # 文件工具
-├── main_new.py              # 🚀 新程序入口
-└── docs/                    # 📚 文档
-    └── ARCHITECTURE.md      # 架构文档
-```
+```bash
+# 构建镜像
+docker build -t zdem-editor .
 
-### 📁 传统结构 (兼容)
-```
-├── main.py                  # 传统入口
-├── models.py                # 数据模型
-├── parser.py                # 文件解析
-└── ...                      # 其他文件
+# 验证导入
+docker run --rm zdem-editor python -c "from zdem_editor.core.models import ZDEMModel; print('Import OK')"
 ```
 
 ---
 
-## 🎉 开始使用
+## 项目结构 | Project Structure
 
-1. **启动**: `python main.py` 或双击 `start.bat`
-2. **加载**: 按 `Ctrl+O` 选择 `sample.zdem`
-3. **探索**: 使用鼠标和快捷键操作模型
+```
+ZDEM_Model_Visualization_Editor/
+├── main.py                  # 应用入口
+├── start.bat                # Windows 启动脚本
+├── requirements.txt         # Python 依赖
+├── Dockerfile               # Docker 构建文件
+├── LICENSE                  # MIT 许可证
+├── .gitignore               # Git 忽略规则
+├── .editorconfig            # 编辑器配置
+├── CHANGELOG.md             # 变更日志
+├── README.md                # 项目说明
+├── docs/
+│   └── index.md             # GitHub Pages 入口
+├── Test/                    # 测试数据与测试脚本
+│   ├── gen0.py
+│   ├── shear0.py
+│   ├── shear1.py
+│   ├── test_enhanced_parser.py
+│   └── test_prop_p4.py
+└── zdem_editor/             # 主包
+    ├── __init__.py
+    ├── core/
+    │   ├── models.py        # 数据模型
+    │   └── parser.py        # 文件解析器
+    ├── ui/
+    │   ├── canvas.py        # 交互式画布
+    │   ├── main_window.py   # 主窗口（中文）
+    │   └── main_window_en.py# 主窗口（英文）
+    └── utils/
+        ├── font_config.py   # 字体配置
+        └── helpers.py       # 工具函数
+```
 
-> 💡 **新手提示**: 建议先阅读 [快速开始指南](docs/QUICK_START.md) 快速上手！
+---
+
+## 引用 | Citation
+
+```bibtex
+@software{zdem_editor2026,
+  title = {ZDEM Model Visualization Editor},
+  year = {2026},
+  url = {https://github.com/Phoenix0531-sudo/ZDEM_Model_Visualization_Editor}
+}
+```
+
+---
+
+## 许可证 | License
+
+本项目基于 MIT 许可证开源。详见 [LICENSE](LICENSE) 文件。
+
+> This project is open-sourced under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+---
+
+<div align="center"><strong>Made for the ZDEM and geotechnical modeling community</strong></div>
