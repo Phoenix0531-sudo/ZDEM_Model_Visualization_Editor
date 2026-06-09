@@ -30,7 +30,7 @@ class MainWindow:
         
     def _setup_window(self):
         """设置窗口属性"""
-        self.root.title("ZDEM Model Visualization Editor")
+        self.root.title("ZDEM Model Editor")
         self.root.geometry("1200x800")
         self.root.minsize(800, 600)
     
@@ -177,7 +177,7 @@ class MainWindow:
             # Update status
             filename = os.path.basename(file_path)
             self.status_label.config(text=f"Loaded: {filename} - {self.current_model.object_count} objects")
-            self.root.title(f"ZDEM Model Visualization Editor - {filename}")
+            self.root.title(f"ZDEM Model Editor - {filename}")
             
         except Exception as e:
             messagebox.showerror("Error", f"Failed to load file:\n{str(e)}")
@@ -306,7 +306,7 @@ class MainWindow:
     
     def show_about(self):
         """显示关于对话框"""
-        about_text = """ZDEM Model Visualization Editor v1.0
+        about_text = """ZDEM Model Editor v1.0
 
 A tool for visualizing and editing ZDEM model files
 

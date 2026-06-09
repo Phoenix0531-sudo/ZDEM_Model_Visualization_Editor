@@ -81,7 +81,7 @@ LANGUAGE_CONFIG = {
         'gline_objects': '几何线段',
     },
     'en': {
-        'title': 'ZDEM Model Visualization Editor',
+        'title': 'ZDEM Model Editor',
         'file_menu': 'File',
         'open_file': 'Open File...',
         'exit': 'Exit',

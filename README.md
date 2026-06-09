@@ -1,6 +1,6 @@
 <div align="center">
 
-# ZDEM Model Visualization Editor
+# ZDEM Model Editor
 
 **ZDEM 模型可视化编辑器 | ZDEM Model File Visualization Tool**
 
@@ -92,8 +92,8 @@
 
 ```bash
 # 克隆仓库
-git clone https://github.com/Phoenix0531-sudo/ZDEM_Model_Visualization_Editor.git
-cd ZDEM_Model_Visualization_Editor
+git clone https://github.com/Phoenix0531-sudo/ZDEM_Model_Editor.git
+cd ZDEM_Model_Editor
 
 # 安装依赖（tkinter 为系统自带，无需 pip 安装）
 pip install matplotlib numpy
@@ -166,7 +166,7 @@ python main.py
 
 ## Docker 使用 | Docker Usage
 
-ZDEM Model Visualization Editor 是 tkinter 桌面 GUI 应用，Docker 环境主要用于**构建验证和依赖安装测试**，不适合作为主要的 GUI 运行方式。tkinter 在 Docker 中需要 `tk-dev` 系统库支持，且需要 X11 转发才能显示窗口。
+ZDEM Model Editor 是 tkinter 桌面 GUI 应用，Docker 环境主要用于**构建验证和依赖安装测试**，不适合作为主要的 GUI 运行方式。tkinter 在 Docker 中需要 `tk-dev` 系统库支持，且需要 X11 转发才能显示窗口。
 
 > This tool is a tkinter desktop GUI application. The Docker environment is intended for **build verification and dependency testing only** — it is not suitable for running the GUI. tkinter requires X11 forwarding in Docker for actual display.
 
@@ -183,7 +183,7 @@ docker run --rm zdem-editor
 ## 项目结构 | Project Structure
 
 ```
-ZDEM_Model_Visualization_Editor/
+ZDEM_Model_Editor/
 ├── main.py                  # 应用入口
 ├── start.bat                # Windows 启动脚本
 ├── requirements.txt         # Python 依赖
@@ -221,9 +221,9 @@ ZDEM_Model_Visualization_Editor/
 
 ```bibtex
 @software{zdem_editor2026,
-  title = {ZDEM Model Visualization Editor},
+  title = {ZDEM Model Editor},
   year = {2026},
-  url = {https://github.com/Phoenix0531-sudo/ZDEM_Model_Visualization_Editor}
+  url = {https://github.com/Phoenix0531-sudo/ZDEM_Model_Editor}
 }
 ```
 

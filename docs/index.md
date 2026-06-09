@@ -1,4 +1,4 @@
-# ZDEM Model Visualization Editor
+# ZDEM Model Editor
 
 <div align="center">
 
@@ -33,7 +33,7 @@ docker run --rm zdem-editor
 
 ## Repository
 
-<https://github.com/Phoenix0531-sudo/ZDEM_Model_Visualization_Editor>
+<https://github.com/Phoenix0531-sudo/ZDEM_Model_Editor>
 
 ## License
 
