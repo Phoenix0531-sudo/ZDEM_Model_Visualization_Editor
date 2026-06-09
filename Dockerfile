@@ -1,6 +1,7 @@
 # Build/test environment only — GUI requires display server (X11/Wayland)
 FROM python:3.11-slim
 
+ENV PYTHONPATH=/app
 WORKDIR /app
 
 # Install system dependencies for tkinter and matplotlib
