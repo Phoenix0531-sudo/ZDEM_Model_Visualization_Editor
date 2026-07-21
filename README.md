@@ -244,3 +244,7 @@ ZDEM_Model_Editor/
 ---
 
 <div align="center"><strong>Made for the ZDEM and geotechnical modeling community</strong></div>
+
+## License
+
+[MIT](LICENSE) — free for commercial use with attribution.
