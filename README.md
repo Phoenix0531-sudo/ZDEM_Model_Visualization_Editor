@@ -2,6 +2,12 @@
 
 # ZDEM Model Editor
 
+**tkinter + matplotlib editor for ZDEM model files**
+
+[English](README.md) | [中文](README.zh-CN.md)
+
+![CI](https://github.com/Phoenix0531-sudo/ZDEM_Model_Editor/actions/workflows/ci.yml/badge.svg)
+
 **ZDEM 模型可视化编辑器 | ZDEM Model File Visualization Tool**
 
 ![Python](https://img.shields.io/badge/Python-3.8%2B-blue)
