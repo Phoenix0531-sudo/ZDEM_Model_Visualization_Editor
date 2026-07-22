@@ -59,15 +59,14 @@ jobs:
 
       - name: Ruff (hard — critical rules)
         run: |
-          uv run ruff check . --select E9,F63,F7,F82
+          # Only lint real Python package + entrypoints (Test/ holds ZDEM DSL samples)
+          uv run ruff check zdem_editor main.py --select E9,F63,F7,F82
 
       - name: Pytest (hard, tests/ only)
         run: |
           set -e
           if [ -d tests ]; then
             uv run pytest -q tests
-          elif [ -d Test ]; then
-            uv run pytest -q Test
           else
             echo "No tests/ directory"
             exit 1

@@ -8,7 +8,7 @@ license = { text = "MIT" }
 authors = [{ name = "Phoenix0531-sudo" }]
 dependencies = [
     "matplotlib>=3.0",
-    "numpy>=1.20"
+    "numpy>=1.20",
 ]
 
 [project.optional-dependencies]
@@ -28,6 +28,8 @@ pythonpath = ["."]
 [tool.ruff]
 line-length = 120
 target-version = "py311"
+# Test/ holds ZDEM DSL sample scripts (shear*.py etc.) that are not Python.
+exclude = ["Test", "docs", ".venv", "scripts"]
 
 [tool.ruff.lint]
 select = ["E9", "F63", "F7", "F82"]
