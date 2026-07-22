@@ -1,69 +1,20 @@
 # ZDEM Model Editor
 
-**ZDEM 模型文件可视化编辑器（tkinter + matplotlib）。**
+**ZDEM 模型文件可视化编辑器 — tkinter + matplotlib。**
 
 [English](README.md) | [中文](README.zh-CN.md)
 
 [![CI](https://github.com/Phoenix0531-sudo/ZDEM_Model_Editor/actions/workflows/ci.yml/badge.svg)](https://github.com/Phoenix0531-sudo/ZDEM_Model_Editor/actions/workflows/ci.yml)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
-可视化改结构文件。Test/ 是 DSL 样例，不是 pytest。
-
-## 预览
-
-![ZDEM Model Editor](docs/screenshots/preview.png)
-
-## 功能
-
-- zdem_editor/ 可视化编辑
-- matplotlib 几何反馈画布
-- 真测试在 tests/（parser 冒烟）
-- ruff 排除 ZDEM DSL 样例树
-
-## 快速开始
-
-### 安装
+代码在 `zdem_editor/`。**`Test/` = ZDEM DSL 样例（非 pytest）**；**`tests/` = 真测试**。ruff 排除 DSL 树。
 
 ```bash
-git clone https://github.com/Phoenix0531-sudo/ZDEM_Model_Editor.git
-cd ZDEM_Model_Editor
 pip install -r requirements.txt
-```
-
-### 使用
-
-```bash
 python main.py
 pytest tests/
 ```
 
-## 项目结构
-
-```
-main.py  zdem_editor/
-Test/    # DSL samples
-tests/   # real pytest
-```
-
-## 相关 ZDEM 工具
-
-| 仓库 | 作用 |
-|------|------|
-| [ZDEM_ParticleTracker](https://github.com/Phoenix0531-sudo/ZDEM_ParticleTracker) | 交互颗粒追踪 + 真实半径渲染 |
-| [ZDEM_Salt_Kinematics](https://github.com/Phoenix0531-sudo/ZDEM_Salt_Kinematics) | 盐构造几何 / 运动学提取与出图 |
-| [ZDEM_Area_Conservation](https://github.com/Phoenix0531-sudo/ZDEM_Area_Conservation) | 面积守恒 / 三角剖分分析 |
-| [ZDEM_Bond_Fracture](https://github.com/Phoenix0531-sudo/ZDEM_Bond_Fracture) | 粘结损伤序列 + visualizer |
-| [ZDEM_Damage_Thresholds](https://github.com/Phoenix0531-sudo/ZDEM_Damage_Thresholds) | 损伤阈值与能量图 |
-| [ZDEM_DFN](https://github.com/Phoenix0531-sudo/ZDEM_DFN) | 离散裂隙网络生成 |
-| [ZDEM_Model_Editor](https://github.com/Phoenix0531-sudo/ZDEM_Model_Editor) | 模型文件可视化编辑 |
-| [ZDEM_Archiver](https://github.com/Phoenix0531-sudo/ZDEM_Archiver) | 大体积结果归档 / 清理 |
-| [ZDEM3D_WEB](https://github.com/Phoenix0531-sudo/ZDEM3D_WEB) | CAE 云端界面 |
-
-
-## 说明
-
-给模型作者用的桌面编辑器。
-
 ## 许可证
 
-MIT。在注明出处的前提下可商业使用（以 LICENSE 为准）。详见 [LICENSE](LICENSE)。
+MIT。详见 [LICENSE](LICENSE)。
