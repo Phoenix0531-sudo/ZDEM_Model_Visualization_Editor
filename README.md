@@ -1,25 +1,29 @@
 # ZDEM Model Editor
 
-**Visual editor for ZDEM model files (tkinter + matplotlib)**
+**Visual editor for ZDEM model files — tkinter + matplotlib.**
 
 [English](README.md) | [中文](README.zh-CN.md)
 
-![CI](https://github.com/Phoenix0531-sudo/ZDEM_Model_Editor/actions/workflows/ci.yml/badge.svg)
-![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)
+[![CI](https://github.com/Phoenix0531-sudo/ZDEM_Model_Editor/actions/workflows/ci.yml/badge.svg)](https://github.com/Phoenix0531-sudo/ZDEM_Model_Editor/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![Python](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/)
 
-Desktop editor for inspecting and tweaking **ZDEM model-related files** with a tkinter shell and matplotlib canvas (`zdem_editor` package).
+Visual editor for ZDEM model files — tkinter + matplotlib.
 
-## Why this exists
+Edit structure files, not raw text only.
 
-Raw ZDEM text models are painful to edit by hand. A focused editor shortens the pre-processing loop for DEM experiments.
 
 ## Features
 
-- GUI main window (`zdem_editor.ui`)
-- Core parse / edit helpers under `zdem_editor/core`
-- `start.bat` convenience launcher on Windows
+- 📝 Model file visual editing under `zdem_editor/`
+- 🖼️ matplotlib canvases for geometry feedback
+- 📁 `Test/` holds ZDEM DSL samples (not pytest)
+- 🧪 Real pytest under `tests/` (parser smoke)
+- ✅ Ruff excludes DSL sample trees
 
-## Install
+## Get started
+
+### Install
 
 ```bash
 git clone https://github.com/Phoenix0531-sudo/ZDEM_Model_Editor.git
@@ -27,20 +31,19 @@ cd ZDEM_Model_Editor
 pip install -r requirements.txt
 ```
 
-## Usage
+### Usage
 
 ```bash
 python main.py
-# or start.bat on Windows
+pytest tests/
 ```
 
 ## Project layout
 
 ```
-main.py
-zdem_editor/{ui,core,utils}/
-Test/                 # sample fixtures when present
-tests/
+main.py  zdem_editor/
+Test/          # DSL samples
+tests/         # real pytest
 ```
 
 ## Related ZDEM tools
@@ -56,6 +59,11 @@ tests/
 | [ZDEM_Model_Editor](https://github.com/Phoenix0531-sudo/ZDEM_Model_Editor) | Model file visual editor |
 | [ZDEM_Archiver](https://github.com/Phoenix0531-sudo/ZDEM_Archiver) | Purge / archive bulky simulation dumps |
 | [ZDEM3D_WEB](https://github.com/Phoenix0531-sudo/ZDEM3D_WEB) | CAE cloud UI (Django + React + VTK.js) |
+
+## Notes
+
+Desktop editor for model authors — pair with DFN / packs generators upstream.
+
 ## License
 
-MIT. Free for commercial use with attribution. See [LICENSE](LICENSE).
+MIT. Free for commercial use with attribution where applicable. See [LICENSE](LICENSE).
