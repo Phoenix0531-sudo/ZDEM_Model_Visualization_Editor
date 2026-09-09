@@ -31,7 +31,7 @@ python main.py
 
 In the app: **File → Open File... (Ctrl+O)** and load a ZDEM DSL script — the samples in `Test/` (e.g. `Test/gen0.py`, `Test/shear0.py`) work out of the box. The canvas renders walls, geometry lines and P4 polygons; the Object List tab groups every entity by type and highlights it on selection. `View → Refresh (F5)` reloads the file from disk.
 
-`Test/` holds real ZDEM DSL sample scripts (not pytest) and is excluded from ruff; the parser suite lives in `tests/`:
+`Test/` holds real ZDEM DSL sample scripts (not pytest) and is excluded from ruff; the parser suite lives in `tests/` (including integration tests that parse the real `Test/` samples):
 
 ```bash
 pytest -q tests
